@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet"  type="text/css" th:href="@{/css/main.css}">
+  <title>Tv Shows</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<!--  <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
+  <script type = "text/javascript">
+
+ /*   $(document).ready( function () {*/
+      function turnRed() {
+        let stat = status;
+        if (stat.toString().includes("ended")) {
+          let element = document.getElementById('el');
+          element.style.backgroundColor = "Red";
+        }
+      }
+/*    });*/
+
+  </script>
+
+</head>
+<body onload="turnRed()">
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col col-sm-3 col-xs-12">
+              <h4 class="title">Tv Shows <span>List</span></h4>
+            </div>
+            <form th:method="POST" th:action="@{/home/search}">
+              <div class="col-sm-9 col-xs-12 text-right">
+                <div class="btn_group">
+                  <input type="text" class="form-control" placeholder="Search" name="keyword">
+  <!--                <button class="btn btn-default" title="Reload"><i class="fa fa-sync-alt"></i></button> -->
+                </div>
+              </div>
+          </form>
+          </div>
+        </div>
+        <div class="panel-body table-responsive">
+          <table class="table">
+            <thead>
+
+            </thead>
+            <tbody th:each="show : ${shows}">
+            <tr>
+              <td th:text="${show.name}"></td>
+              <td th:text="${show.type}"></td>
+              <td id="el" th:text="${show.status}" turnRed()> </td>
+              <td th:text="${show.language}"></td>
+              <td th:text="${show.runtime}"></td>
+              <td th:text="${show.premiered}"></td>
+              <td th:text="${show.summary}"></td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
